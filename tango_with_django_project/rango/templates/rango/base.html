@@ -28,6 +28,8 @@
                         {% if user.is_authenticated %}
                             <!-- Show these links when the user is logged in -->
                             <li><a href="{% url 'rango:restricted' %}">Restricted Page</a></li>
+                            <li><a href="{% url 'auth_password_change' %}">Change Password</a></li>
+                            
                             <li><a href="{% url 'auth_logout' %}?next={% url 'rango:index' %}">Logout</a></li>
                         {% else %}
                             <!-- Show these links when the user is NOT logged in -->
