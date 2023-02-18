@@ -8,16 +8,21 @@
             Unknown Category
         {% endif %}
     {% endblock %}
-    
     {% block body_block %}
+    <div class="container-fluid py-3">
+        
         {% if category %}
-        <h1>{{ category.name }}</h1>
+        <div class="row bg-light rounded-3">
+            <h1 class="display-5 fw-bold">{{ category.name }}</h1>
+        </div>
         {% if pages %}
-        <ul>
+        <div class="row py-5">
+        <ul class="nav flex-column">
             {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            <li class="nav-link"><a href="{{ page.url }}">{{ page.title }}</a></li>
             {% endfor %}
         </ul>
+        </div>
         {% else %}
         <strong>No pages currently in category.</strong>
         {% endif %}

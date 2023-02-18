@@ -1,18 +1,21 @@
- <ul>
+ <ul class="nav flex-column">
     {% if categories %}
-            {% for c in categories %}
+        {% for c in categories %}
         {% if c == current_category %}
-        <li>
+        <li class="nav-link active">
         <strong>
-                <a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a>
+                <a href="{% url 'rango:show_category' c.slug %}">
+                    <span data-feather="archive"></span>{{ c.name }}
+                </a>
         </strong>
         </li>
         {% else  %}
-        <li>
-            <a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'rango:show_category' c.slug %}">
+                <span data-feather="archive"></span>
+                {{ c.name }}</a>
         </li>
         {% endif %}
     {% endfor %}
-        
     {% endif %}
     </ul>

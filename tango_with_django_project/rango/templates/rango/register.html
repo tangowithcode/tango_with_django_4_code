@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Register for Rango</h1>
+<div class="container-fluid py-3">
+	<div class="row bg-light rounded-3">
+		<h1 class="display-5 fw-bold">
+Register for Rango</h1>
+</div>
+<div class="row py-5">
+    <div class="col-md-6">
 {% if registered %}
 Rango says: <strong>thank you for registering!</strong>
 <a href="{% url 'rango:index' %}">Return to the homepage.</a><br />
@@ -24,5 +30,8 @@ Rango says: <strong>register here!</strong><br />
     <!-- Provide a button to click to submit the form. -->
     <input type="submit" name="submit" value="Register" />
 </form>
+</div>
+</div>
+</div>
 {% endif %}
 {% endblock %}

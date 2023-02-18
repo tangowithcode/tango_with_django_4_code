@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to Rango</h1>
+<div class="container-fluid py-3">
+	<div class="row bg-light rounded-3">
+		<h1 class="display-5 fw-bold">Login to Rango</h1>
+
+    </div>
+    <div class="row py-5">
+        <div class="col-md-6">
 <form id="login_form" method="post" action="{% url 'rango:login' %}">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
@@ -15,4 +21,7 @@
     <br />
     <input type="submit" value="submit" />
 </form>
+</div>
+</div>
+</div>
 {% endblock %}

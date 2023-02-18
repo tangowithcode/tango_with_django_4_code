@@ -4,15 +4,24 @@
 About
 {% endblock %}
 {% block body_block %}
-<h1>Rango says...</h1>
-	        <div>
-	            here is the about page <br />
-This tutorial has been put together by Leif and David.
-	        </div>
-     <div>
+<div class="container-fluid py-3">
+	<div class="row bg-light rounded-3">
+		<h1 class="display-5 fw-bold">Rango says...</h1>
+		<p class="col-md-8 fs-4 py-3">
+			Here is the About page! <br />
+			This tutorial has been put together by Leif and David.
+		</p>		
+	</div>
+	 <div class="row py-5">
+		 <div class="col-md-6">
                <img src="{% static 'images/rango.jpg' %}"
 	                 alt="Picture of Rango." />
-				<img src="{% get_media_prefix %}cat.jpg"
+		</div>
+		<div class="col-md-6">
+					<img src="{% get_media_prefix %}cat.jpg"
 	                 alt="Picture of a Cat." />
-	        </div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

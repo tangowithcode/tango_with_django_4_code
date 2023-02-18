@@ -5,15 +5,46 @@
 {% endblock %}
 	
 {% block body_block %}
-	<h1>Login</h1>
-	<form method="post" action=".">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="Log In" />
-		<input type="hidden" name="next" value="{{ next }}" />
-	</form>
+	
+<div class="container-fluid py-3">
+	<div class="row bg-light rounded-3">
+		<h1 class="display-5 fw-bold">Login</h1>
+	</div>
+
+	<div class="row py-5">
+		<div class="col-md-6 text-center">
+	
+		<form class="form-signin w-100 m-auto"  method="post" action=".">
+			{% csrf_token %}
+		  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+	  
+		  <div class="form-floating">
+			<input class="form-control" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+			<label for="id_username">Username</label>
+		  </div>
+		  <div class="form-floating">
+			<input class="form-control"   type="password" name="password" autocomplete="current-password" required id="id_password">
+			<label for="id_password">Password</label>
+		  </div>
+	  
+		  <button class="w-100 btn btn-lg btn-primary" type="submit" name="next" value="{{ next }}" >Sign in</button>
+		  <input type="hidden" name="next" value="{{ next }}" />
+		</form>
+
+	</div>
+	</div>
+
+
 	<p>
 		Not registered?
 		<a href="{% url 'registration_register' %}">Register here!</a>
 	</p>
+</div>
+</div>
+</div>
 {% endblock %}
+
+
+
+
+
