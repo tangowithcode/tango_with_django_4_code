@@ -1,0 +1,57 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+{% block title_block %}
+ Search
+{% endblock %}
+	
+{% block body_block %}
+<div class="container-fluid py-3">
+	<div class="row bg-light rounded-3">
+		<h1 class="display-5 fw-bold">Search with Rango</h1>
+    </div>    
+    <div class="row py-5">
+        
+ <form class="row g-3"
+	 id="user-form"
+	 method="post"
+	 action="{% url 'rango:search' %}">
+	 {% csrf_token %}
+     
+      <div class="col-auto">
+        <label  class="visually-hidden">Search</label>
+        <input type="text" readonly class="form-control-plaintext" value="Enter your search terms">
+      </div>
+      <div class="col-auto">
+        <label class="visually-hidden">Search</label>
+        <input type="text" class="form-control" id="query" placeholder="Search" name="query">
+      </div>
+      
+      <div class="col-auto">
+        <button type="submit" name="submit" class="btn btn-primary mb-3">Search</button>
+      </div>
+</form>
+</div>
+
+
+
+<div class="row py-5">
+{% if result_list %}
+<h2>Results</h2>
+ <div class="list-group">
+	{% for result in result_list %}
+	 <div class="list-group-item">
+	  <h3 class="list-group-item-heading">
+	   <a href="{{ result.link }}">
+	    {{ result.title|safe|escape }}
+	   </a>
+	  </h3>
+	  <p class="list-group-item-text">
+	   {{ result.snippet|safe|escape }}
+	  </p>
+	 </div>
+	 {% endfor %}
+	</div>
+	{% endif %}
+</div>
+</div>
+{% endblock %}

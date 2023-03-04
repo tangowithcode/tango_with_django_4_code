@@ -318,3 +318,15 @@ def visitor_cookie_handler(request):
 	    
     # Update/set the visits cookie
     request.session['visits'] = visits
+ 
+
+from rango.search import run_query   
+    
+def search(request):
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+	        # Run our Bing function to get the results list!
+	        result_list = run_query(query)
+    return render(request, 'rango/search.html', {'result_list': result_list})
