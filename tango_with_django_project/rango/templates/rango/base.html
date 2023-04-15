@@ -12,14 +12,14 @@
     <title>{% block title_block %}How to Tango with Django!{% endblock %}</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
-<link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="icon" href="{% static 'images/favicon.ico' %}">
 <meta name="theme-color" content="#712cf9">
 
     <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.comddocs/5.3/dashboard.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/examples/dashboard/dashboard.css" rel="stylesheet">
   </head>
   <body>
     
@@ -120,8 +120,10 @@
     <p class="float-right"><a href="#">Back to top</a></p>
     <p>&copy; 2023 Tango With Django 4 &middot;</p>
 </footer>
-    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>  
-    </script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="https://getbootstrap.com/dashboard.js"></script>
+    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static "js/jquery-3.6.4.min.js" %}" crossorigin="anonymous"></script>
+    <script src="{% static "js/rango-jquery.js" %}" crossorigin="anonymous"></script>
   </body>
 </html>
