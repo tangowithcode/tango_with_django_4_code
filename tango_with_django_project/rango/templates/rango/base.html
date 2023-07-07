@@ -12,14 +12,14 @@
     <title>{% block title_block %}How to Tango with Django!{% endblock %}</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
-<link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 
     <!-- Favicons -->
 <link rel="icon" href="{% static 'images/favicon.ico' %}">
 <meta name="theme-color" content="#712cf9">
 
     <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.comddocs/5.3/dashboard.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/examples/dashboard/dashboard.css" rel="stylesheet">
   </head>
   <body>
     
@@ -87,12 +87,6 @@
             <span data-feather="file-text" class="align-text-bottom"></span>  
             Restricted Page</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'rango:search' %}">
-            <span data-feather="file-text" class="align-text-bottom"></span>  
-            Search   </a>
-        </li>
-          
           <li class="nav-item">
           <a class="nav-link" href="{% url 'auth_password_change' %}">
             <span data-feather="file-text" class="align-text-bottom"></span>  

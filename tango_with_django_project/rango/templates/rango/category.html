@@ -19,7 +19,14 @@
         <div class="row py-5">
         <ul class="nav flex-column">
             {% for page in pages %}
-            <li class="nav-link"><a href="{{ page.url }}">{{ page.title }}</a></li>
+            <li class="nav-link">
+                <a href="{% url 'rango:goto' %}?page_id={{ page.id }}">{{ page.title }}</a>
+                {% if page.views > 1 %}
+	                ({{ page.views }} views)
+	            {% elif page.views == 1 %}
+	                ({{ page.views }} view)
+	            {% endif %}
+            </li>
             {% endfor %}
         </ul>
         </div>
@@ -31,4 +38,42 @@
         {% else %}
         The specified category does not exist.
         {% endif %}
+        {% if user.is_authenticated %}
+        <div class="row py-5">
+            <form class="row g-3" id="user-form" method="post" action="{% url 'rango:show_category' category.slug %}">
+                {% csrf_token %}
+                <div class="col-auto">
+                    <label class="visually-hidden">Search</label>
+                    <input type="text" readonly class="form-control-plaintext" value="Enter your search terms">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden">Search</label>
+                    <input type="text" class="form-control" id="query" placeholder="{{ query }}" name="query">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" name="submit" class="btn btn-primary mb-3">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="row py-5">
+            {% if result_list %}
+            <h2>Results</h2>
+            <div class="list-group">
+                {% for result in result_list %}
+                <div class="list-group-item">
+                    <h3 class="list-group-item-heading">
+                        <a href="{{ result.link }}">
+                            {{ result.title|safe|escape }}
+                        </a>
+                    </h3>
+                    <p class="list-group-item-text">
+                        {{ result.snippet|safe|escape }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
     {% endblock %}

@@ -13,7 +13,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from datetime import datetime
-
+from rango.search import run_query   
+    
 
 def index(request):
     context_dict = {'aboldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
@@ -76,7 +77,7 @@ def show_category(request, category_name_slug):
 
         # Retrieve all of the associated pages.
         # The filter() will return a list of page objects or an empty list.
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
@@ -90,6 +91,16 @@ def show_category(request, category_name_slug):
         # the template will display the "no category" message for us.
         context_dict['category'] = None
         context_dict['pages'] = None
+    
+    # Start new search functionality code.
+    context_dict['query'] = 'search'
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+            
+        if query:
+            context_dict['result_list'] = run_query(query)
+            context_dict['query'] = query
+	# End new search functionality code.
 
     # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context=context_dict)
@@ -320,13 +331,27 @@ def visitor_cookie_handler(request):
     request.session['visits'] = visits
  
 
-from rango.search import run_query   
-    
-def search(request):
-    result_list = []
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-        if query:
-	        # Run our Bing function to get the results list!
-	        result_list = run_query(query)
-    return render(request, 'rango/search.html', {'result_list': result_list})
+
+
+#def search(request):
+#    result_list = []
+#    if request.method == 'POST':
+#        query = request.POST['query'].strip()
+#        if query:
+#	        # Run our Bing function to get the results list!
+#	        result_list = run_query(query)
+#    return render(request, 'rango/search.html', {'result_list': result_list})
+
+
+def goto_url(request):
+    if request.method == 'GET':
+        page_id = request.GET.get('page_id')
+        try:
+            selected_page = Page.objects.get(id=page_id)
+            selected_page.views = selected_page.views + 1
+            selected_page.save()
+            return redirect(selected_page.url)
+        except Page.DoesNotExist:
+            return redirect(reverse('rango:index'))
+    return redirect(reverse('rango:index'))
+
