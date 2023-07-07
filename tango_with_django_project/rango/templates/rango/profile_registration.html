@@ -1,0 +1,24 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+Register - Step 2
+{% endblock %}
+
+{% block body_block %}
+<div class="container-fluid py-3">
+    <div class="row bg-light rounded-3">
+        <h1 class="display-5 fw-bold">Register Here - Step 2</h1>
+    </div>
+    <div class="row py-5">
+        <div class="col-md-6">
+            <form method="post" action="{% url 'rango:register_profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Create Profile" />
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
