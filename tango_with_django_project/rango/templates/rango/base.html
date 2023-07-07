@@ -34,11 +34,12 @@
       <ul>
         {% if user.is_authenticated %}
             <!-- Show these links when the user is logged in -->
-            <a  href="{% url 'auth_logout' %}?next={% url 'rango:index' %}">Logout</a>
+            <li><a href="{% url 'rango:profile' user.username %}">Profile</a></li>
+            <li><a  href="{% url 'auth_logout' %}?next={% url 'rango:index' %}">Logout</a></li>
         {% else %}
             <!-- Show these links when the user is NOT logged in -->
-            <a href="{% url 'registration_register' %}">Sign Up</a>
-            <a href="{% url 'auth_login' %}">Login</a>
+            <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
         {% endif %}
         </ul>
     </div>
