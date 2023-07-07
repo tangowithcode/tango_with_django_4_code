@@ -382,3 +382,87 @@ from registration.backends.simple.views import RegistrationView
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
         return reverse('rango:register_profile')
+    
+from django.views import View    
+
+class AboutView(View):
+    def get(self, request):
+        context_dict = {}
+        visitor_cookie_handler(request)
+        context_dict['visits'] = request.session['visits']
+        return render(request, 'rango/about.html',  context_dict)
+ 
+        
+from django.utils.decorators import method_decorator       
+
+class AddCategoryView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        form = CategoryForm()
+        return render(request, 'rango/add_category.html', {'form': form})
+    
+    @method_decorator(login_required)
+    def post(self, request):
+        form = CategoryForm(request.POST)
+        
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse('rango:index'))
+        else:
+            print(form.errors)
+        
+        return render(request, 'rango/add_category.html', {'form': form})
+    
+    
+class ShowCategoryView(View):
+    def get(self, request, category_name_slug):
+        context_dict = self.gather_category_data(context_dict={}, category_name_slug=category_name_slug)
+        return render(request, 'rango/category.html', context=context_dict)   
+    
+    def post(self, request, category_name_slug):
+        context_dict = self.gather_category_data(context_dict={}, category_name_slug=category_name_slug)
+        query = request.POST['query'].strip()
+        if query:
+            context_dict['result_list'] = run_query(query)
+            context_dict['query'] = query
+        return render(request, 'rango/category.html', context=context_dict)   
+
+    
+    def gather_category_data(self, context_dict, category_name_slug):
+        try:
+            # Can we find a category name slug with the given name?
+            # If we can't, the .get() method raises a DoesNotExist exception.
+            # The .get() method returns one model instance or raises an exception.
+            category = Category.objects.get(slug=category_name_slug)
+
+            # Retrieve all of the associated pages.
+            # The filter() will return a list of page objects or an empty list.
+            pages = Page.objects.filter(category=category).order_by('-views')
+
+            # Adds our results list to the template context under name pages.
+            context_dict['pages'] = pages
+            # We also add the category object from
+            # the database to the context dictionary.
+            # We'll use this in the template to verify that the category exists.
+            context_dict['category'] = category
+        except Category.DoesNotExist:
+            # We get here if we didn't find the specified category.
+            # Don't do anything -
+            # the template will display the "no category" message for us.
+            context_dict['category'] = None
+            context_dict['pages'] = None
+        return context_dict    
+    
+
+class IndexView(View): 
+    def get(self, request):
+        context_dict = {'aboldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
+        category_list = Category.objects.order_by('-likes')[:5]
+        context_dict['categories'] = category_list
+        page_list = Page.objects.order_by('-views')[:5]
+        context_dict['pages'] = page_list
+        context_dict['extra'] = 'From the model solution on GitHub'
+        context_dict['visits'] = get_server_side_cookie(request, 'visits', 1)
+        visitor_cookie_handler(request)
+        response = render(request, 'rango/index.html', context=context_dict)
+        return response
