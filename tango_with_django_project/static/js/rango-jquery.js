@@ -11,7 +11,6 @@ $(document).ready(function() {
         $('#msg').html(msgStr);
     });
 
-});
 
 $('p').hover(
     function() {
@@ -21,3 +20,5 @@ $('p').hover(
         $(this).css('color', 'black');
     }
 );
+
+});

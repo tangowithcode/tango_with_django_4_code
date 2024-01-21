@@ -10,11 +10,24 @@
     {% endblock %}
     {% block body_block %}
     <div class="container-fluid py-3">
-        
         {% if category %}
         <div class="row bg-light rounded-3">
             <h1 class="display-5 fw-bold">{{ category.name }}</h1>
         </div>
+        <div>
+            <strong id="like_count">{{ category.likes }}</strong> likes
+            {% if user.is_authenticated %}
+            <button id="like_btn"
+             data-categoryid="{{ category.id }}"
+              class="btn btn-primary btn-sm"
+              type="button">
+            <span data-feather="thumbs-up"></span>
+             Like Category
+            </button>
+            {% endif %}
+           </div>
+
+
         {% if pages %}
         <div class="row py-5">
         <ul class="nav flex-column">
