@@ -28,24 +28,22 @@
            </div>
 
 
-        {% if pages %}
-        <div class="row py-5">
-        <ul class="nav flex-column">
+           {% if pages %}
+           <ul>
             {% for page in pages %}
-            <li class="nav-link">
+               <li>
                 <a href="{% url 'rango:goto' %}?page_id={{ page.id }}">{{ page.title }}</a>
-                {% if page.views > 1 %}
-	                ({{ page.views }} views)
-	            {% elif page.views == 1 %}
-	                ({{ page.views }} view)
-	            {% endif %}
+                 {% if page.views > 1 %}
+               ({{ page.views }} views)
+                 {% elif page.views == 1 %}
+                  ({{ page.views }} view)
+                 {% endif %}
             </li>
-            {% endfor %}
-        </ul>
-        </div>
-        {% else %}
-        <strong>No pages currently in category.</strong>
-        {% endif %}
+               {% endfor %}
+           </ul>
+           {% else %}
+               <strong>No pages currently in category.</strong>
+           {% endif %}
 
        <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> <br />
         {% else %}
@@ -82,6 +80,13 @@
                     <p class="list-group-item-text">
                         {{ result.snippet|safe|escape }}
                     </p>
+                    <button class="btn btn-info btn-sm rango-page-add"
+                    type="button"
+                    data-categoryid="{{ category.id }}"
+                    data-title="{{ result.title }}"
+                    data-url="{{ result.link }}">
+                    Add
+                  </button>
                 </div>
                 {% endfor %}
             </div>
