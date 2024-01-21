@@ -28,13 +28,13 @@
   </head>
   <body>
     
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{% url 'rango:index' %}">Rango</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-nav">
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{% url 'rango:index' %}">Rango</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <ul>
         {% if user.is_authenticated %}
@@ -48,17 +48,23 @@
         {% endif %}
         </ul>
     </div>
-  </div>
-</header>
+    </div>
+  </header>
 
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
-
+        <input type="search"
+         id="search-input"
+         class="form-control ds-input"
+         placeholder="Search..." />
+       </div>
+     <div class="position-sticky pt-3 sidebar-sticky" id="categories-listing">
         {% block sidebar_block %}
-        {% get_category_list category %}
-      {% endblock %}
+         {% get_category_list category %}
+        {% endblock %}
+        </div>
   <!--
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -110,7 +116,6 @@
         </li>
           {% endif %}
         </ul>
-    </div>
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

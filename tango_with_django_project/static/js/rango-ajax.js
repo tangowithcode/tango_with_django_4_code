@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    feather.replace();
+  feather.replace();
 
     $('#like_btn').click(function() {
      var catecategoryIdVar;
@@ -12,4 +12,16 @@ $(document).ready(function() {
        $('#like_btn').hide();
       })
     });
+
+    $('#search-input').keyup(function() {
+        var query;
+        query = $(this).val();
+           
+        $.get('/rango/suggest/',
+         {'suggestion': query},
+          function(data) {
+           $('#categories-listing').html(data);
+          })
+       });
+       
    });
